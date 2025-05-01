@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
+    "dev": "next dev --turbopack",
     "build": "next build",
     "start": "next start",
     "lint": "next lint"
@@ -13,16 +13,15 @@
     "@farcaster/frame-sdk": "^0.0.31",
     "@google/generative-ai": "^0.24.0",
     "@vercel/og": "^0.6.5",
-    "lightningcss-darwin-arm64": "^1.29.3",
-    "next": "15.2.2",
+    "next": "^15.3.1",
     "pg": "^8.14.0",
     "react": "^19.0.0",
     "react-dom": "^19.0.0"
   },
   "devDependencies": {
-    "@tailwindcss/oxide": "^4.1.5",
-    "@tailwindcss/oxide-darwin-arm64": "^4.1.5",
-    "@tailwindcss/postcss": "^4.1.5",
-    "tailwindcss": "^4.1.5"
+    "@tailwindcss/oxide": "^4.0.14",
+    "@tailwindcss/oxide-darwin-arm64": "^4.0.14",
+    "@tailwindcss/postcss": "^4.0.14",
+    "tailwindcss": "^4.0.14"
   }
 }
