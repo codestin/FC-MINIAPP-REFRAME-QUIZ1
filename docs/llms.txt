@@ -1,0 +1,387 @@
+file: ./content/docs/getting-started.mdx
+meta: {
+  "title": "Getting Started"
+}
+        
+Welcome to the **FarHack Hacking Guide**, a resource filled with potential hackathon ideas, rules of the road, community tools/docs, and everything else you'll need to get started hacking.
+
+## Why build on Farcaster?
+
+Before we get you fully set up with your first project, we want to kick things off by highlighting some of the key value props building on [Farcaster](https://farcaster.xyz) gives you:
+
+* Open social graph and data to build on top of
+* Rich [mini app](https://miniapps.farcaster.xyz) ecosystem that lets you build mobile experiences and meet users right where they are
+* Every user has a crypto wallet, which both makes it easier to find potential users and also to bring them to unique onchain actions
+* Super helpful developer ecosystem for debugging errors, testing projects, and more
+
+## Quick Start
+
+Let's get you set up with your first FarHack project!
+For the fastest set up, we recommend two paths:
+
+### 1. Set up a mini app (recommended)
+
+To set up a mini app, run the command below in your terminal:
+
+<Tabs items={['npm', 'pnpm', 'yarn', 'bun']}>
+  <Tab value="npm">
+    ```
+    npm create @farcaster/mini-app
+    ```
+  </Tab>
+
+  <Tab value="pnpm">
+    ```
+    pnpm create @farcaster/mini-app
+    ```
+  </Tab>
+
+  <Tab value="yarn">
+    ```
+    yarn create @farcaster/mini-app
+    ```
+  </Tab>
+
+  <Tab value="bun">
+    ```
+    bunx create @farcaster/mini-app
+    ```
+  </Tab>
+</Tabs>
+
+Running the command above creates a new Farcaster mini app using the [@farcaster/mini-app](https://github.com/farcasterxyz/frames/tree/main/packages/create-mini-app) CLI. The CLI will give you the option of making a frame either with Neynar's [create-neynar-farcaster-frame](https://github.com/neynarxyz/create-neynar-farcaster-frame) template or with a simple React + Vite template.
+
+Note: If you don't have a terminal or if you're new to coding, we recommend checking out a platform such as [Replit](https://replit.com) or [Val Town](https://val.town) -- which both give you not only an online coding environment but also a built-in agent for editing your project.
+
+### 2. Query Farcaster data using Neynar
+
+If you want to go a bit deeper and analyze data or build a bit larger of an app, we recommend using [Neynar](https://neynar.com), the easiest way to build on Farcaster.
+
+First, head over to [neynar.com](https://neynar.com) and sign up for a plan. They even have a free tier, which is super helpful to get started playing around. Once you've signed up for a plan, you should be able to access your credentials on thier [Developer Portal](https://dev.neynar.com).
+
+In this example, we're going to use Neynar's NodeJS SDK to fetch the token balances for a particular Farcaster user.
+
+<Tabs items={['npm', 'pnpm', 'yarn', 'bun']}>
+  <Tab value="npm">
+    ```
+    npm install @neynar/nodejs-sdk
+    ```
+  </Tab>
+
+  <Tab value="pnpm">
+    ```
+    pnpm install @neynar/nodejs-sdk
+    ```
+  </Tab>
+
+  <Tab value="yarn">
+    ```
+    yarn add @neynar/nodejs-sdk
+    ```
+  </Tab>
+
+  <Tab value="bun">
+    ```
+    bun install @neynar/nodejs-sdk
+    ```
+  </Tab>
+</Tabs>
+
+Once we have Neynar's SDK set up with our credentials, we can make a request such as the one below -- which will get us data on a particular Farcaster user as well as their token balances. Combining onchain and social data can open up unique experiences where alpha from friends can lead to actions(eg. purchasing a token that you see your friend has bought).
+
+```tsx
+import { NeynarAPIClient, Configuration } from "@neynar/nodejs-sdk";
+
+const config = new Configuration({
+  apiKey: process.env.NEYNAR_API_KEY,
+});
+
+// Replace with your FID
+const fid = 3
+
+const client = new NeynarAPIClient(config);
+
+async function fetchUserBalances(fid: number) {
+  try {
+    const response = await client.fetchUserBalance({
+      fid: fid,
+      networks: ['base'],
+    });
+    console.log("User Balances:", response.user_balance);
+  } catch (error) {
+    console.error("Error fetching user balances:", error);
+  }
+}
+
+fetchUserBalances(fid);
+```
+
+## Building with AI
+
+The FarHack Hacking Guide is LLM friendly, so you can use our docs to help you build and debug apps. Two recommended ways to use AI to work with the Hacking Guide are:
+
+1. Add Hacking Guide's [llms.txt](/llms.txt) file to your docs in Cursor (recommended)
+2. Copy the contents of indivdual pages and paste them into your model of choice
+
+## Next Steps
+
+Congrats on getting your first FarHack project set up! You might be wondering what's next, here are a few paths that we recommend following:
+
+* Continue on in our docs by reading the [Participating in FarHack](/hacking-guide/participating-in-farhack) guide, which goes over how to submit your project using the FarHack hackathon software and best practices for marketing/getting feedback on your project
+* Use our LLM-friendly docs to continue building your project, which we recommend and which can get you a long way!
+
+
+file: ./content/docs/index.mdx
+meta: {
+  "title": "Introduction"
+}
+        
+![FarHack Banner](https://i.imgur.com/IzrcL7A.jpeg)
+
+Welcome to the **FarHack Hacking Guide**, a resource filled with potential hackathon ideas, rules of the road, community tools/docs, and everything else you'll need to get started hacking.
+
+This is a resource you could read before participating in a FarHack, or even content to read if you want to start vibe coding Farcaster Mini Apps for the first time. Regardless, we want to set you up for success!
+
+Below is an overview of the Hacking Guide's different sections and what they contain, if this is your first time reading it we recommend going through each page in order.
+
+## Overview
+
+<Cards>
+  <Card title="Getting Started" description="Steps to help get your first hackathon project up and running" href="/hacking-guide/getting-started" />
+
+  <Card title="Participating in FarHack" description="An overview of submitting your project in a FarHack hackathon" href="/hacking-guide/participating-in-farhack" />
+
+  <Card title="The FarStack" description="The developer tools and startups that make up Farcaster's ecosystem" href="/hacking-guide/the-farstack" />
+
+  <Card title="Next Steps" description="Where to go next in your hacking journey" href="/hacking-guide/next-steps" />
+
+  <Card title="Documentation" description="Links to documentation for top Farcaster developer tools" href="/hacking-guide/resources/documentation" />
+
+  <Card title="Open Ideas" description="A list of open Farcaster ideas to build" href="/hacking-guide/resources/open-ideas" />
+</Cards>
+
+
+file: ./content/docs/next-steps.mdx
+meta: {
+  "title": "Next Steps"
+}
+        
+Congrats, you've made it through the FarHack Hacking Guide! We hope that after going through this content you feel confident and prepared to build your first project on Farcaster.
+
+If you're looking for some next steps, here are a few thing we suggest you try out:
+
+* Find a cool project idea in the [/someone-build](https://warpcast.com/~/channel/someone-build) channel and vibecode your first mini app. Two templates you could quickly start from are [Moe's template on Val Town](https://www.val.town/x/moe/MiniAppStarter) and the [create-mini-app CLI from Farcaster](https://github.com/farcasterxyz/miniapps/tree/main/packages/create-mini-app).
+* If you already have a project on Farcaster, share it in a cast! Feel free to post it in top channels and developer group chats, and if you tag `@farhack` we'd also be happy to help amplify your project
+
+And if you're looking for a refresher, you can always go back through the guide's content below:
+
+## Overview
+
+<Cards>
+  <Card title="Introduction" description="Intro to the content in FarHack's Hacking Guide" href="/hacking-guide" />
+
+  <Card title="Getting Started" description="Steps to help get your first hackathon project up and running" href="/hacking-guide/getting-started" />
+
+  <Card title="Participating in FarHack" description="An overview of submitting your project in a FarHack hackathon" href="/hacking-guide/participating-in-farhack" />
+
+  <Card title="The FarStack" description="The developer tools and startups that make up Farcaster's ecosystem" href="/hacking-guide/the-farstack" />
+
+  <Card title="Documentation" description="Links to documentation for top Farcaster developer tools" href="/hacking-guide/resources/documentation" />
+
+  <Card title="Open Ideas" description="A list of open Farcaster ideas to build" href="/hacking-guide/resources/open-ideas" />
+</Cards>
+
+
+file: ./content/docs/participating-in-farhack.mdx
+meta: {
+  "title": "Participating in FarHack"
+}
+        
+This document is meant to serve as a manual for participating in FarHack and will go over everything from joining a hackathon to inviting teammates to submitting your first project.
+
+<Callout title="Note">
+  If you are participating in the upcoming Builders Day @ FarCon 2025 hackathon, please stand by for more information coming in the next few days, including details on the bounties.
+</Callout>
+
+## Creating a hackathon team
+
+![Hackathons list on FarHack](https://i.imgur.com/fOKatPd.png)
+
+All of our previous and upcoming hackathons can be [found here](/hackathons). Once you click into any of the hackathons, you'll be navigated to its dedicated homepage where you can view if the hackathon is still active, what the prizes and other teams are, and most importantly create/join a team.
+
+**To create your own team from scratch:**
+
+* Click on one of the active hackathons
+* Either navigate to the "Your Team" tab and click "Create Team" or hit "Create Team" directly from the hackathon's homepage
+
+<Callout title="Note">
+  Hitting "Create Team" doesn't mean you've submitted your final project(don't worry you'll still have time for that!), it just lets you start preparing your team's final submission and gives the hackathon organizers a better sense of who is participating.
+</Callout>
+
+Once your team is created, you'll be able to use the "Your Team" page to edit/submit your hackathon project and invite/remove teammates.
+
+## Accepting a hackathon team invite
+
+If you have been invited to a hackathon team, you would have been notified in three possible ways(most likely the first two):
+
+* Via a mini app notification in [Warpcast](https://warpcast.com)
+* Via a direct cast in Warpcast
+* Via a personal message(eg. your friend who invited you manually sent you the link on iMessage)
+
+Once you have receieved the link/notification, you should be able to click on it and land directly on a page that shows you who's inviting you and lets you accept/decline the invite. Once you've accpeted the invite, the "Your Team" tab will list you as a member and let you edit project details.
+
+## Learning about the hackathon's bounties and partners
+
+![Bounties from the Based House at ETHDenver hackathon](https://i.imgur.com/rHIkfrA.png)
+
+All hackathons on FarHack have a set of bounties and partners who put up/sponsor those bounties. To view all of the bounties for the pariticular hackathon you're participating in, you can go to the "Bounties" tab for that hackathon's page and will see a page filled with all of the different bounties.
+
+It's also worth noting that another great place to find out even more about the partners behind these bounties is on Farcaster directly! If a company, let's say [MBD](https://mbd.xyz) for example, has a bounty in a hackathon, it's likely that someone on their team will have threads expanding on the sorts of things they'd want to see built. This also opens opportunities for you to dive deeper into what that team does or even reach out to team members/the founder directly.
+
+## Submitting your project
+
+You're almost there, now it's time to submit your project for judging!
+Go to the "Your Team" tab and where it says "Edit", make sure you have all of the details filled out for your project:
+
+* Name
+* Description
+* Bounties/Tracks
+* Links
+
+Once you have this all filled out, you should be able to hit the "Submit" button and then double confirm since submitting is an irreversible action.
+
+Congrats! You've now submitted your first FarHack project and are well on your way to building amazing products in the Farcaster ecosystem, we hope to see you soon at another hackathon!
+
+
+file: ./content/docs/the-farstack.mdx
+meta: {
+  "title": "The FarStack"
+}
+        
+<img
+  src="https://i.imgur.com/bd7LDsz.png"
+  alt="The FarStack diagram from dwr.eth"
+  style={{
+  width: '100%',
+  maxWidth: '450px',
+  height: 'auto',
+  borderRadius: 10,
+  display: 'block',
+  marginLeft: 0
+}}
+/>
+
+The FarStack is the set of developer tooling and infrastructure that make up Farcaster's protocol and developer ecosystem.
+
+While [this blog post on The FarStack](https://dylansteck.com/blog/the-farstack) goes further into what all of that looks like/means, the goal of this page is to highlight the particular pieces of developer tooling in the FarStack that you could make use of. The sections below are both pillars of the ecosystem and contain tools/alpha you can use for your hackathon project.
+
+## Blockchains
+
+The FID(Farcaster ID) registry lives on OP Mainnet and ENS names, which are supported but not required by the protocol, live on the Ethereum L1(Mainnet). The other onchain aspect of the Farcaster ecosystem is the growing economy(or [Farconomy](https://dune.com/0xluc/farconomy) 😉) of Farcaster-native coins on Base. Warpcast and other apps have recently been leaning into the onchain nature of Farcaster's community through embedded/smart wallets, ticker pages in the social feed and and pushing transactions in Mini Apps.
+
+## Protocol Infra and APIs
+
+At the core of Farcaster's infrastructure sits Snapchain, a blockchain-like network for storing and syncing social data that's being implemented to replace the previous Delta Graph system. The protocol's specialized design focuses on social operations, allowing for better scaling and efficient data pruning. The Fname Server provides a unified identity layer by resolving human-readable usernames to FIDs, complementing the Snapchain protocol and enabling seamless interactions across the ecosystem.
+
+However other than just the protocol itself, an entire suite of infra and APIs has emerged, which has greatly benefitted developers who want to build on top of Farcaster. Specialized clients like Buoy provide targeted functionality for the ecosystem, serving specific developer needs beyond what general purpose clients offer. Meanwhile, key infrastructure providers like Neynar, OpenRank, and MBD have become critical to the developer ecosystem by providing API layers that abstract away much of the protocol's complexity:
+
+* [Neynar](https://neynar.com) offers comprehensive APIs and data products for reading and writing to Farcaster, user authentication via Sign in with Neynar (SIWN), bot creation tools, and much more.
+* [OpenRank](https://openrank.com) provides specialized ranking algorithms and data indexing that help developers surface relevant content for their users.
+* [MBD](https://mbd.xyz) delivers customizable feed generation services that enable cross-chain holistic user profiles and personalized content discovery.
+
+This robust architecture combined with the rapidly growing ecosystem of developer tools has created a powerful foundation that even established teams are embracing. Neynar, OpenRank, MBD, and other infra providers now power many of the most popular teams building on Farcaster, abstracting away protocol complexity and enabling developers to build sophisticated experiences in a fraction of the time it would take otherwise. These providers have become so essential that they're now backed by major investors and serve as the backbone for both indie developers and well-funded teams looking to enter the Farcaster ecosystem.
+
+## Clients
+
+The client layer is where users actually experience Farcaster, and the ecosystem has evolved far beyond a single app. Warpcast remains the flagship client created by the Merkle team (the team behind the protocol), offering a polished experience that has set user expectations. The open protocol approach has encouraged alternative clients to flourish—Super, Recaster, Herocast, and others each introducing new features and catering to different types of users.
+
+Looking ahead, future clients like Coinbase Wallet could bring Farcaster to millions of mainstream users, while apps that integrate Farcaster's social graph into their features like Interface, Rodeo, and Rainbow demonstrate the power of permissionless data access without building full clients. This multi-client ecosystem ensures users can choose their preferred experience without sacrificing their social connections—a fundamental strength of Farcaster's open protocol design.
+
+## Mini Apps
+
+Sitting atop the FarStack are Mini Apps(prev. Frames), which are interactive apps that can be shared and saved inside of Farcaster clients. Users can open mini apps either in a post or from a dedicated Mini Apps page, and when opened mini apps let you see an entire webpage that has context to your Farcaster identity and social graph. Mini Apps provide developers with access to user context, notifications, and access to the user's connected wallet.
+
+What makes Mini Apps so powerful is how they completely reshape app distribution and discovery. Developers don't need to compete in crowded app stores or convince users to download another app—they can build experiences that spread naturally through social sharing, instantly reaching an engaged audience. Users simply tap a mini app in their feed and immediately get an app-like experience with their Farcaster identity already connected, complete with wallet transactions, notifications, and other native features without any downloads or new accounts. This creates an unprecedented level of frictionless interaction that's spawning all kinds of creative applications—from games and utilities to commerce tools and financial apps—fundamentally changing what's possible inside social clients and potentially offering the breakthrough approach consumer crypto needs to reach mainstream users.
+
+
+file: ./content/docs/resources/appendix.mdx
+meta: {
+  "title": "Appendix"
+}
+        
+The Appendix below is an assortment of useful links for hacking that didn't fit into the other resource pages.
+
+| Name                                                                         | Description                                                                    |
+| ---------------------------------------------------------------------------- | ------------------------------------------------------------------------------ |
+| [Official Website](https://docs.farcaster.xyz)                               | The homepage for Farcaster's developer documentation                           |
+| [Mini Apps Documentation](https://miniapps.farcaster.xyz/)                   | Documentation for Farcaster Mini Apps                                          |
+| [Mini Apps Specification](https://miniapps.farcaster.xyz/docs/specification) | The full Farcaster Mini Apps spec and an overview of the Client SDK API        |
+| [AuthKit Installation](https://docs.farcaster.xyz/auth-kit/installation)     | How to use AuthKit, Farcaster's SDK for implementing Sign In with Farcaster    |
+| [Learn about the protocol](https://docs.farcaster.xyz/learn)                 | Learn about Farcaster, how the protocol runs, and more                         |
+| [awesome-farcaster](https://github.com/a16z/awesome-farcaster)               | A collection of awesome Farcaster links including clients, tools, and more     |
+| [Reference](https://docs.farcaster.xyz/reference/)                           | References to Warpcast APIs, Hubble HTTP/GRPC APIs, contracts, and other specs |
+
+## Videos
+
+<div style={{ position: "relative", width: "100%", paddingBottom: "56.25%", height: 0, overflow: "hidden" }}>
+  <iframe src="https://www.youtube.com/embed/vMWjol6xHJ0?si=bmlTsqIrRNAwkRDy" title="YouTube video player" style={{ position: "absolute", top: 0, left: 0, width: "100%", height: "100%", border: 0 }} allow="accelerometer; autoplay; clipboard-write; encrypted-media; fullscreen; gyroscope; picture-in-picture; web-share" referrerPolicy="strict-origin-when-cross-origin" allowFullScreen />
+</div>
+
+
+file: ./content/docs/resources/documentation.mdx
+meta: {
+  "title": "Documentation"
+}
+        
+Below is a collection of Farcaster-related documentation that will get you fully set up and ready to hack!
+
+## Farcaster Docs
+
+| Name                                                                         | Description                                                                    |
+| ---------------------------------------------------------------------------- | ------------------------------------------------------------------------------ |
+| [Official Website](https://docs.farcaster.xyz)                               | The homepage for Farcaster's developer documentation                           |
+| [Mini Apps Documentation](https://miniapps.farcaster.xyz/)                   | Documentation for Farcaster Mini Apps                                          |
+| [Mini Apps Specification](https://miniapps.farcaster.xyz/docs/specification) | The full Farcaster Mini Apps spec and an overview of the Client SDK API        |
+| [AuthKit Installation](https://docs.farcaster.xyz/auth-kit/installation)     | How to use AuthKit, Farcaster's SDK for implementing Sign In with Farcaster    |
+| [Learn about the protocol](https://docs.farcaster.xyz/learn)                 | Learn about Farcaster, how the protocol runs, and more                         |
+| [Reference](https://docs.farcaster.xyz/reference/)                           | References to Warpcast APIs, Hubble HTTP/GRPC APIs, contracts, and other specs |
+
+## Neynar Docs
+
+| Name                                                                                                                                             | Description                                                                        |
+| ------------------------------------------------------------------------------------------------------------------------------------------------ | ---------------------------------------------------------------------------------- |
+| [Official Website](https://docs.neynar.com)                                                                                                      | The homepage for Neynar's developer documentation                                  |
+| [Quickstart](https://docs.neynar.com/reference/quickstart)                                                                                       | Start building on Farcaster with Neynar                                            |
+| [Create Farcaster mini app (v2 frame) in \< 60s](https://docs.neynar.com/docs/create-v2-farcaster-frame-in-60s)                                  | Create a v2 Farcaster frame in less than 60 seconds                                |
+| [How to create a Farcaster bot](https://docs.neynar.com/docs/how-to-create-a-farcaster-bot)                                                      | Create a Farcaster bot on Neynar in a few quick steps                              |
+| [Trending feed on Farcaster](https://docs.neynar.com/docs/how-to-get-trending-casts-on-farcaster)                                                | Show casts trending on the Farcaster network through Neynar                        |
+| [Create a Farcaster Account with Wallet Integration](https://docs.neynar.com/docs/guide-to-creating-a-farcaster-account-with-wallet-integration) | How to use Neynar to create a Farcaster account without having a end user mnemonic |
+
+## Coinbase Docs
+
+| Name                                                                            | Description                                                                             |
+| ------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------- |
+| [MiniKit Docs](https://docs.base.org/builderkits/minikit/overview)              | The homepage for MiniKit, the easiest way to build Mini Apps on Base                    |
+| [OnchainKit Docs](https://docs.base.org/builderkits/onchainkit/getting-started) | The homepage for OnchainKit, your go-to SDK for building beautiful onchain applications |
+| [Coinbase Developer Docs](https://docs.cdp.coinbase.com/)                       | Explore Coinbase's API & SDK references, demos, and guides for building onchain apps    |
+
+## Community Docs
+
+| Name                                                             | Description                                                                          |
+| ---------------------------------------------------------------- | ------------------------------------------------------------------------------------ |
+| [MBD Docs](https://docs.mbd.xyz/reference/intro/getting-started) | The official docs for MBD                                                            |
+| [dTech Farcaster Docs](https://dtech.vision/farcaster/)          | The homepage for dTech's comprehensive Farcaster docs                                |
+| [Coinbase Developer Docs](https://docs.cdp.coinbase.com/)        | Explore Coinbase's API & SDK references, demos, and guides for building onchain apps |
+
+
+file: ./content/docs/resources/open-ideas.mdx
+meta: {
+  "title": "Open Ideas"
+}
+        
+Below are an assortment of casts and documents with open ideas that you can build in a FarHack or as your first Farcaster project.
+
+| Name                                                                                                                                            | Description                                                                                                              |
+| ----------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------ |
+| [Farcaster mini app ideas](https://docs.google.com/document/d/1yW_MgL3Lv-KmKtvqiPH50oob8CIpvPdgQ7c3PA8bOak/edit?tab=t.0#heading=h.mjrtwj8o26sg) | A list of 70+ Farcaster mini app ideas, all proposed by the community and curated by [linda](https://warpcast.com/linda) |
+| [/someone-build](https://warpcast.com/~/channel/someone-build)                                                                                  | A Farcaster channel filled with ideas others want built                                                                  |
